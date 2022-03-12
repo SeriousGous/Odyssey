@@ -58,7 +58,7 @@ public class MovementScript : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && GameObject.Find("PlayerMan").GetComponent<CameraSwitcher>().is_2d_cam == true)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

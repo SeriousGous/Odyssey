@@ -33,7 +33,7 @@ public class CharacterMove : MonoBehaviour {
 	void Update()
 	{
 		//Jump
-		if (Input.GetKeyDown (KeyCode.Space))
+		if (Input.GetKeyDown (KeyCode.Space) && GameObject.Find("PlayerMan").GetComponent<CameraSwitcher>().is_2d_cam == true)
 		{
 			
 			if (grounded) 

@@ -7,18 +7,21 @@ using Cinemachine;
 
 public class CameraSwitcher : MonoBehaviour
 {
-
+    public bool is_2d_cam = true;
+    Vector3 camera_pos;
     [SerializeField]
     private CinemachineFreeLook vcam1; //3d
 
     [SerializeField]
     private CinemachineVirtualCamera vcam2; //2d  
 
+
     void OnEnable()
     {
         EventManager.OnClicked += CamSwitch;
+
     }
-    
+
     void OnDisable()
     {
         EventManager.OnClicked -= CamSwitch;
@@ -26,11 +29,21 @@ public class CameraSwitcher : MonoBehaviour
 
     void CamSwitch()
     {
-        Debug.Log("Hello world!");
-        GameObject.Find("SecondPersonCamera").transform.position += new Vector3(36f, 2f, 34f);
-        GameObject.Find("ThirdPersonPlayer").GetComponent<MovementScript>().gravity = 0f;
-        vcam1.Priority = 0;
-        vcam2.Priority = 1;
+        if (is_2d_cam)
+        {
+            CamBackSwitch();
+            is_2d_cam = !is_2d_cam;
+            // camera_pos = GameObject.FindGameObjectWithTag("Your_Tag_Here").transform.position;
+        }
+        else
+        {
+            Debug.Log("Hello world!");
+            GameObject.Find("SecondPersonCamera").transform.position += new Vector3(36f, 2f, 34f);
+            GameObject.Find("ThirdPersonPlayer").GetComponent<MovementScript>().gravity = 0f;
+            vcam1.Priority = 0;
+            vcam2.Priority = 1;
+            is_2d_cam = !is_2d_cam;
+        }
     }
     void CamBackSwitch()
     {
@@ -39,3 +52,4 @@ public class CameraSwitcher : MonoBehaviour
         vcam1.Priority = 1;
     }
 }
+// ¿  ∆≈ ﬂ ’Œ–Œÿ
